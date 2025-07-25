@@ -11,6 +11,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   if (!user) {
     // Don't redirect if user is not logged in, just show the page without creating user
     return (
+
       <div>
         <Navbar />
         {children}

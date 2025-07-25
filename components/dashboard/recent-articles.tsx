@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import {
   Table,
@@ -11,6 +13,9 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { Prisma } from "@/app/generated/prisma";
+import {  useFormStatus } from "react-dom";
+import { startTransition, useTransition } from "react";
+import { deleteArticle } from "@/actions/delete-article";
 
 type RecentArticlesprops = {
   articles: Prisma.ArticlesGetPayload<{
@@ -63,9 +68,9 @@ const RecentArticles: React.FC<RecentArticlesprops> = ({ articles }) => {
                 <TableRow key={article.id}>
                   <TableCell className="font-medium">{article.title}</TableCell>
                   <TableCell>
-                    <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
+                    <Badge className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
                       Published
-                    </span> 
+                    </Badge> 
                   </TableCell>
                   <TableCell>{article.comments.length}</TableCell>
                   <TableCell>{new Date(article.createdAt).toDateString()}</TableCell>
@@ -87,12 +92,19 @@ const RecentArticles: React.FC<RecentArticlesprops> = ({ articles }) => {
   );
 };
 export default RecentArticles;
-
-const DeleteButton = () => {
+type DeleteButtonProps ={
+  articleId:string
+}
+const DeleteButton : React.FC<DeleteButtonProps> = ({articleId}) => {
+ const [isPending , startTransition] =useTransition()
   return (
-    <form action="">
-      <Button variant={"outline"} size={"sm"}>
-        Delete
+    <form action={()=>{
+      startTransition(async()=>{
+        await deleteArticle(articleId)
+      })
+    }}>
+      <Button disabled={isPending} variant={"outline"} size={"sm"}>
+        {isPending ? 'Loading.. ':'Delete'}
       </Button>
     </form>
   );
