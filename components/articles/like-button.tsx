@@ -13,7 +13,7 @@ type LikeButtonProps = {
 }
 const LikeButton:React.FC<LikeButtonProps> = ({articleId,likes,isLiked}) => {
 
-  const [optimisticLike , setOptimisticLike] = useOptimistic(10)
+  const [optimisticLike , setOptimisticLike] = useOptimistic(likes.length)
   const [isPending,startTransition] = useTransition()
 
   const handleLikeDisLike = async()=>{
@@ -26,9 +26,9 @@ const LikeButton:React.FC<LikeButtonProps> = ({articleId,likes,isLiked}) => {
     <div className="flex gap-4 mb-12 border-t pt-8">
 
         <form action={handleLikeDisLike}>
-            <Button variant={'ghost'}>
-                <ThumbsUp className="h-5 w-5"/>
-                0
+            <Button disabled={isPending} variant={'ghost'}>
+                <ThumbsUp className={`h-5 w-5 fill ${isLiked ? 'fill-white':''}`}/>
+                {optimisticLike}
             </Button>
         </form>
          <Button variant={'ghost'}>
