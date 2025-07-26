@@ -43,6 +43,14 @@ export const createComment = async (articleId: string, prevState: CreateCommentF
         }
     })
 
+    if (!existinguser) {
+        return {
+            errors: {
+                formErrors: ['User not found. Please try logging in again.']
+            }
+        }
+    }
+
     try {
         await prisma.comment.create({
             data: {
