@@ -1,6 +1,22 @@
+'use client'
+import { useOptimistic } from "react"
+import { useTransition } from "react"
 import { Button } from "../ui/button"
 import {ThumbsUp,Share2, Bookmark} from 'lucide-react'
+
+
+
+type LikeButton = {
+  articleId:string,
+  likes:Like[],
+  isLiked:boolean
+}
 const LikeButton = () => {
+
+  const [optimisticLike , setOptimisticLike] = useOptimistic(10)
+  const [isPending,startTransition] = useTransition()
+
+  const handleLikeDisLike = async({articleId})
   return (
     <div className="flex gap-4 mb-12 border-t pt-8">
 

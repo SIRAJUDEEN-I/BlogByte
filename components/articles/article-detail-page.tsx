@@ -11,7 +11,7 @@ type ArticleDetailsPageProps = {
       author: {
         select: {
           name: true;
-          emial: true;
+          email: true;
           imageUrl: true;
         };
       };
