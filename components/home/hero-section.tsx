@@ -13,7 +13,7 @@ const HeroSection = () => {
       <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 py-24 md:flex-row md:py-32">
 
         <div className="flex-1 space-y-8  text-left sm:text-center  ">
- <span className="text-bold text-xl text-red-500">this website is under construction !!!</span>
+ 
             <h1 className="text-4xl mt-15 font-bold tracking-tight text-white sm:text-5xl md:text-6xl">Explore the world through
 
             <span  className=" bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
