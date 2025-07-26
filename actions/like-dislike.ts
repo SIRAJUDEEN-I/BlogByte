@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache"
 
 
 
-export const likeDeislikeToggle = async(articleId:string)=>{
+export const likeDislikeToggle = async(articleId:string)=>{
 
 
     const {userId} = await auth()

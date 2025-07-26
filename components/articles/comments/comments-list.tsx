@@ -1,9 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { prisma } from "@/lib/prisma";
+
 import { Prisma } from "@/app/generated/prisma";
 
 type CommentListProps = {
-  comments: Prisma.CommentGetPayLoad<{
+  comments: Prisma.CommentGetPayload<{
     include: {
       author: {
         select: {

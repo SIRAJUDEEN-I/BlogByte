@@ -3,24 +3,29 @@ import { useOptimistic } from "react"
 import { useTransition } from "react"
 import { Button } from "../ui/button"
 import {ThumbsUp,Share2, Bookmark} from 'lucide-react'
+import { likeDislikeToggle } from "@/actions/like-dislike"
 
 
-
-type LikeButton = {
+type LikeButtonProps = {
   articleId:string,
   likes:Like[],
   isLiked:boolean
 }
-const LikeButton = () => {
+const LikeButton:React.FC<LikeButtonProps> = ({articleId,likes,isLiked}) => {
 
   const [optimisticLike , setOptimisticLike] = useOptimistic(10)
   const [isPending,startTransition] = useTransition()
 
-  const handleLikeDisLike = async({articleId})
+  const handleLikeDisLike = async()=>{
+    startTransition(async()=>{
+      setOptimisticLike(isLiked ? optimisticLike -1 :optimisticLike+1)
+      await likeDislikeToggle(articleId)
+    })
+  }
   return (
     <div className="flex gap-4 mb-12 border-t pt-8">
 
-        <form action="">
+        <form action={handleLikeDisLike}>
             <Button variant={'ghost'}>
                 <ThumbsUp className="h-5 w-5"/>
                 0
