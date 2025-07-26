@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { Prisma } from "@/app/generated/prisma";
 
 type CommentListProps = {
@@ -13,7 +12,7 @@ type CommentListProps = {
         };
       };
     };
-  }>;
+  }>[];
 };
 
 const CommentsList: React.FC<CommentListProps> = ({ comments }) => {
@@ -22,7 +21,7 @@ const CommentsList: React.FC<CommentListProps> = ({ comments }) => {
       {comments.map((comment) => (
         <div key={comment.id} className="flex gap-4">
           <Avatar className="h-10 w-10">
-            <AvatarImage src={comment.author.imageUrl} />
+            <AvatarImage src={comment.author.imageUrl || ""} />
             <AvatarFallback>{comment.author.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
