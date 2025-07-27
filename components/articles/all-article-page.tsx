@@ -2,21 +2,22 @@ import { Card } from "../ui/card"
 import Image from "next/image"
 import { Avatar,AvatarImage,AvatarFallback } from "../ui/avatar"
 import { Search } from "lucide-react"
-import { Prisma } from "@/app/generated/prisma"
-
 
 type AllArticlePageProps = {
-    articles:Prisma.ArticlesGetPayload<{
-        include:{
-            author:{
-                select:{
-                    name:true,
-                    email:true,
-                    imageUrl:true,
-                }
-            }
-        }
-    }>[]
+    articles: Array<{
+        id: string;
+        title: string;
+        content: string;
+        category: string;
+        featuredImage: string;
+        authorId: string;
+        createdAt: Date;
+        author: {
+            name: string;
+            email: string;
+            imageUrl: string | null;
+        };
+    }>
 }
 const AllArticlePage:React.FC<AllArticlePageProps> = async({articles}) => {
 

@@ -1,18 +1,17 @@
-import { Prisma } from "@/app/generated/prisma";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+
 type CommentListProps = {
-  comments: Prisma.CommentGetPayload<{
-    include: {
-      author: {
-        select: {
-          name: true;
-          email: true;
-          imageUrl: true;
-        };
-      };
+  comments: Array<{
+    id: string;
+    body: string;
+    createdAt: Date;
+    author: {
+      name: string;
+      email: string;
+      imageUrl: string | null;
     };
-  }>[];
+  }>;
 };
 const CommentList: React.FC<CommentListProps> = ({ comments }) => {
   return (

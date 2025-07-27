@@ -12,23 +12,29 @@ import {
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
-import { Prisma } from "@/app/generated/prisma";
 import { useTransition } from "react";
 import { deleteArticle } from "@/actions/delete-article";
 
 type RecentArticlesprops = {
-  articles: Prisma.ArticlesGetPayload<{
-    include: {
-      comments: true;
-      author: {
-        select: {
-          name: true;
-          email: true;
-          imageUrl: true;
-        };
-      };
+  articles: Array<{
+    id: string;
+    title: string;
+    content: string;
+    category: string;
+    featuredImage: string;
+    authorId: string;
+    createdAt: Date;
+    comments: Array<{
+      id: string;
+      body: string;
+      createdAt: Date;
+    }>;
+    author: {
+      name: string;
+      email: string;
+      imageUrl: string | null;
     };
-  }>[];
+  }>
 };
 
 const RecentArticles: React.FC<RecentArticlesprops> = ({ articles }) => {

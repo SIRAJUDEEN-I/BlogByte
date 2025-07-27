@@ -1,4 +1,3 @@
-import { Prisma } from "@/app/generated/prisma";
 import { Avatar,AvatarFallback,AvatarImage } from "../ui/avatar";
 import CommentsList from "./comments/comments-list";
 import LikeButton from "./like-button";
@@ -7,17 +6,20 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
 type ArticleDetailsPageProps = {
-  article: Prisma.ArticlesGetPayload<{
-    include: {
-      author: {
-        select: {
-          name: true;
-          email: true;
-          imageUrl: true;
-        };
-      };
+  article: {
+    id: string;
+    title: string;
+    content: string;
+    category: string;
+    featuredImage: string;
+    authorId: string;
+    createdAt: Date;
+    author: {
+      name: string;
+      email: string;
+      imageUrl: string | null;
     };
-  }>;
+  };
 };
 
 const ArticleDetailPage: React.FC<ArticleDetailsPageProps> = async ({ article }) => {

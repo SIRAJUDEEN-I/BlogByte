@@ -6,12 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Articles } from "@/app/generated/prisma";
 import { updateArticles } from "@/actions/edit-article";
 import Image from "next/image";
 
 type EditPropsPage = {
-  article: Articles;
+  article: {
+    id: string;
+    title: string;
+    content: string;
+    category: string;
+    featuredImage: string;
+    authorId: string;
+    createdAt: Date;
+  };
 };
 const EditArticlePage: React.FC<EditPropsPage> = ({ article }) => {
   const [content, setContent] = useState(article.content);
