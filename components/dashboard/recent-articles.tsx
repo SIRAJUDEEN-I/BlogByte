@@ -13,8 +13,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { Prisma } from "@/app/generated/prisma";
-import {  useFormStatus } from "react-dom";
-import { startTransition, useTransition } from "react";
+import { useTransition } from "react";
 import { deleteArticle } from "@/actions/delete-article";
 
 type RecentArticlesprops = {
@@ -29,7 +28,7 @@ type RecentArticlesprops = {
         };
       };
     };
-  }>;
+  }>[];
 };
 
 const RecentArticles: React.FC<RecentArticlesprops> = ({ articles }) => {

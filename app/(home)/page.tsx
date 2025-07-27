@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Button
   
  } from '@/components/ui/button'
+import { AllArticlePageSkeleton } from '../articles/page'
 const Home = () => {
   return (
     <main> 
@@ -17,7 +18,7 @@ const Home = () => {
               <p className='mt-4 text-lg text-gray-600 dark:text-gray-300'>Discover our most popular and trending content</p>
 
             </div>
-            <Suspense fallback={<h1>Loading...</h1>}>
+            <Suspense fallback={<AllArticlePageSkeleton/>}>
             
         <TopArticles />
             </Suspense>

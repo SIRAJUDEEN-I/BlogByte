@@ -2,8 +2,6 @@ import { prisma } from "@/lib/prisma"
 import { Card } from "../ui/card"
 import Link from "next/link"
 import Image from "next/image"
-import { cn } from "@/lib/utils";
-
 import { Avatar,AvatarFallback,AvatarImage } from "../ui/avatar";
 const TopArticles = async () => {
   

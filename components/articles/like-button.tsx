@@ -4,6 +4,7 @@ import { useTransition } from "react"
 import { Button } from "../ui/button"
 import {ThumbsUp,Share2, Bookmark} from 'lucide-react'
 import { likeDislikeToggle } from "@/actions/like-dislike"
+import { Like } from "@/app/generated/prisma"
 
 
 type LikeButtonProps = {
