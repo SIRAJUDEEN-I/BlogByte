@@ -100,7 +100,7 @@ export async function BlogDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">{articles.length}</div> 
             <p className="text-xs text-muted-foreground mt-1">
-              Articles you've published
+              Articles you have published
             </p>
           </CardContent>
         </Card>
