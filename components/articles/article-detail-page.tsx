@@ -9,7 +9,7 @@ import CommentInput from "./comments/comment-input";
 import ShareButton from "@/components/articles/share-button";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { ArrowLeft, Calendar, User, Eye, MessageCircle, Heart, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, User, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 type ArticleDetailsPageProps = {

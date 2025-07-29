@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Search, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import ToggleMode from "./toggle-mode";
 import Link from "next/link";
 import SearchInput from "./search-input";

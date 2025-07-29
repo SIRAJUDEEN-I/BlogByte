@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 import { createComment } from "@/actions/create-comment"
 import { useActionState } from "react"
 import { useUser, SignInButton } from "@clerk/nextjs"
-import { MessageCircle, Send, User } from "lucide-react"
+import { MessageCircle, Send } from "lucide-react"
 
 type CommentInputProps = {
   articleId: string

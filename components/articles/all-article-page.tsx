@@ -133,8 +133,8 @@ export default AllArticlePage
 
 
 const NoSearchResultPage = () => {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
+    return (
+        <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
             {/* Icon Container */}
             <div className="mb-6 p-6 bg-zinc-100 dark:bg-zinc-800 rounded-full">
                 <Search className="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
@@ -147,7 +147,7 @@ const NoSearchResultPage = () => {
 
             {/* Description */}
             <p className="text-zinc-600 dark:text-zinc-400 text-lg max-w-md leading-relaxed">
-                We couldn't find any articles matching your search criteria. Try adjusting your search terms or browse our latest articles.
+                We couldn&apos;t find any articles matching your search criteria. Try adjusting your search terms or browse our latest articles.
             </p>
 
             {/* Suggestions */}
@@ -163,5 +163,5 @@ const NoSearchResultPage = () => {
                 </ul>
             </div>
         </div>
-  )
+    )
 }
