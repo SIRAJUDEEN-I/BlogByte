@@ -16,7 +16,7 @@ const SearchInput = () => {
 
 <Search className='absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' /> 
 <Input type="text" name='search' placeholder='search'
-defaultValue={searchParams.get('search') || ""}  className='pl-10  md:w-48 focus-visible:ring-1'/>
+defaultValue={searchParams.get('search') || ""}  className='pl-10  md:w-48 rounded-2xl focus-visible:ring-0 border-zinc-600 focus:scale-102'/>
 
 </div>
 

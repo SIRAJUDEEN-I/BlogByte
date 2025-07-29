@@ -71,7 +71,7 @@ export async function BlogDashboard() {
   ]);
 
   return (
-    <main className="flex-1 p-4 md:p-8">
+    <main className="flex-1 p-4 md:p-8 bg-gradient-to-br from-zinc-50/30 to-gray-50/30 dark:from-zinc-950/30 dark:to-gray-950/30 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -81,7 +81,7 @@ export async function BlogDashboard() {
           </p>
         </div>
         <Link href={"/dashboard/articles/create"}>
-          <Button className="gap-2">
+          <Button className="gap-2 shadow-sm hover:shadow-md transition-shadow duration-200">
             <PlusCircle className="h-4 w-4" />
             New Article
           </Button>
@@ -89,47 +89,53 @@ export async function BlogDashboard() {
       </div>
 
       {/* Quick Stats - Only for current user */}
-      <div className="grid gap-4 md:grid-cols-3 mb-8">
-        <Card>
+      <div className="grid gap-6 md:grid-cols-3 mb-8">
+        <Card className="border-zinc-200/60 dark:border-zinc-800/60 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 hover:border-zinc-300/80 dark:hover:border-zinc-700/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Your Articles
             </CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <div className="p-2 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+              <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{articles.length}</div> 
-            <p className="text-xs text-muted-foreground mt-1">
+            <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{articles.length}</div> 
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
               Articles you have published
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-zinc-200/60 dark:border-zinc-800/60 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 hover:border-zinc-300/80 dark:hover:border-zinc-700/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Comments Received
             </CardTitle>
-            <MessageCircle className="h-4 w-4 text-muted-foreground" />
+            <div className="p-2 bg-green-50 dark:bg-green-950/30 rounded-lg">
+              <MessageCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalComments}</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{totalComments}</div>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
               Comments on your articles
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-zinc-200/60 dark:border-zinc-800/60 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 hover:border-zinc-300/80 dark:hover:border-zinc-700/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Likes Received
             </CardTitle>
-            <Heart className="h-4 w-4 text-muted-foreground" />
+            <div className="p-2 bg-red-50 dark:bg-red-950/30 rounded-lg">
+              <Heart className="h-4 w-4 text-red-600 dark:text-red-400" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalLikes}</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{totalLikes}</div>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
               Likes on your articles
             </p>
           </CardContent>
@@ -137,7 +143,9 @@ export async function BlogDashboard() {
       </div>
 
       {/* Recent Articles - Only current user's articles */}
-      <RecentArticles articles={articles} />
+      <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm border border-zinc-200/60 dark:border-zinc-800/60 rounded-lg p-6 shadow-sm">
+        <RecentArticles articles={articles} />
+      </div>
     </main>
   );
 }

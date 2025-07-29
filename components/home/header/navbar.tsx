@@ -3,45 +3,24 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Menu, X } from "lucide-react";
-import  ToggleMode  from "./toggle-mode";
+import ToggleMode from "./toggle-mode";
 import Link from "next/link";
-// import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
-// import { SignedIn, UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
-import { SignedIn, SignedOut,SignInButton,SignUpButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { AnimatedBackground } from '@/components/motion-primitives/animated-background';
 
+// ✅ Fix: Proper navigation items structure
 const NavItems = [
-                <Link key='articles'
-                href="/articles"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                Articles
-              </Link>,
-             
-              <Link
-              key='about'
-                href="/about"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                About
-              </Link>,
-              <Link
-              key='dashboard'
-                href="/dashboard"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                Dashboard
-              </Link>
-
-]
-
+  { id: 'articles', label: 'Articles', href: '/articles' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'dashboard', label: 'Dashboard', href: '/dashboard' },
+];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className=" top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="top-0 z-50 w-full border-b border-zinc-600 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Left Section - Logo & Desktop Navigation */}
@@ -52,41 +31,39 @@ export default function Navbar() {
                 <span className="bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
                   Blog
                 </span>
-                <span className="tex
-                t-foreground">Byte</span>
+                <span className="text-foreground">Byte</span>
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Fixed */}
             <div className="hidden md:flex items-center gap-4">
               <AnimatedBackground  
-              className='rounded-lg bg-zinc-100 dark:bg-zinc-800'
-        transition={{
-          type: 'spring',
-          bounce: 0.2,
-          duration: 0.3,
-        }}
-        enableHover>
-
-          {NavItems.map((item, index) => (
-          <button
-            key={index}
-            data-id={item}
-            type='button'
-            className='px-2 py-1 text-zinc-600 transition-colors duration-300 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50'
-          >
-            {item}
-          </button>
-        ))}
-
-                </AnimatedBackground>
+                className='rounded-lg bg-zinc-100 dark:bg-zinc-800'
+                transition={{
+                  type: 'spring',
+                  bounce: 0.2,
+                  duration: 0.3,
+                }}
+                enableHover
+              >
+                {NavItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    data-id={item.id} 
+                    className='px-3 py-2 text-sm font-medium text-zinc-600 transition-colors duration-300 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50'
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </AnimatedBackground>
             </div>
           </div>
 
           {/* Right Section - Search & Actions */}
           <div className="flex items-center gap-4">
             {/* Search Bar (Desktop) */}
-            <SearchInput/>
+            <SearchInput />
 
             {/* Theme Toggle */}
             <ToggleMode />
@@ -96,22 +73,15 @@ export default function Navbar() {
             </SignedIn>
             
             <SignedOut>
-                <div className="hidden md:flex items-center gap-2">
-
-
-            <SignInButton>
-                   <Button variant="outline">Login</Button>
-
-            </SignInButton>
-            <SignUpButton>
-
-                    <Button>Sign up</Button>
-            </SignUpButton>
-
-                </div>
+              <div className="hidden md:flex items-center gap-2">
+                <SignInButton>
+                  <Button variant="outline">Login</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>Sign up</Button>
+                </SignUpButton>
+              </div>
             </SignedOut>
-            
-            </div>
 
             {/* Mobile Menu Button */}
             <Button
@@ -126,6 +96,7 @@ export default function Navbar() {
                 <Menu className="h-5 w-5" />
               )}
             </Button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -133,58 +104,31 @@ export default function Navbar() {
           <div className="md:hidden py-4 space-y-4 border-t">
             {/* Search Bar (Mobile) */}
             <div className="px-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  name="search"
-                  
-                  placeholder="Search articles..."
-                  className="pl-10 w-full focus-visible:ring-1"
-                />
-              </div>
+              <SearchInput />
             </div>
 
             {/* Mobile Navigation Links */}
             <div className="space-y-2 px-4">
-              <Link
-                href="/articles"
-                className="block px-3 py-2 text-base font-medium text-foreground"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Articles
-              </Link>
-              <Link
-                href="/tutorials"
-                className="block px-3 py-2 text-base font-medium text-foreground"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Tutorials
-              </Link>
-              <Link
-                href="/about"
-                className="block px-3 py-2 text-base font-medium text-foreground"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link
-                href="/dashboard"
-                className="block px-3 py-2 text-base font-medium text-foreground"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Dashboard
-              </Link>
+              {NavItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="block px-3 py-2 text-base font-medium text-foreground hover:bg-accent rounded-md"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
 
             {/* Mobile Auth Buttons */}
             <SignedOut> 
               <div className="px-4 flex flex-col gap-2">
-                 <SignInButton> 
+                <SignInButton> 
                   <Button variant="outline" className="w-full">
                     Login
                   </Button>
-                 </SignInButton>
+                </SignInButton>
                 <SignUpButton> 
                   <Button className="w-full">Sign up</Button>
                 </SignUpButton> 
