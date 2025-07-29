@@ -10,6 +10,7 @@ import { auth } from "@clerk/nextjs/server";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+
 type ArticleDetailsPageProps = {
   article: {
     id: string;
@@ -25,9 +26,14 @@ type ArticleDetailsPageProps = {
       imageUrl: string | null;
     };
   };
+  urlParams?:{
+    page?:string ;
+    search?:string;
+  };
 };
 
-const ArticleDetailPage: React.FC<ArticleDetailsPageProps> = async ({ article }) => {
+const ArticleDetailPage: React.FC<ArticleDetailsPageProps> = async ({ article , urlParams }) => {
+  
   const comments = await prisma.comment.findMany({
     where: {
       articleId: article.id,
@@ -56,13 +62,13 @@ const ArticleDetailPage: React.FC<ArticleDetailsPageProps> = async ({ article })
   });
 
   const isLiked: boolean = likes.some((like) => like.userId === user?.id);
-
+console.log(urlParams)
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-8">
-          <Link href="/articles">
+          <Link href={`/articles?search=${urlParams?.search}&page=${urlParams?.page}`}>
             <Button variant="outline" className="gap-2">
               <ArrowLeft className="h-4 w-4" />
               Back to Articles

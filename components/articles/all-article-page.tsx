@@ -1,8 +1,11 @@
+'use client'
 import { Card } from "../ui/card"
 import Image from "next/image"
 import { Avatar,AvatarImage,AvatarFallback } from "../ui/avatar"
 import { Search } from "lucide-react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+
 
 type AllArticlePageProps = {
     articles: Array<{
@@ -20,13 +23,22 @@ type AllArticlePageProps = {
         };
     }>
 }
-const AllArticlePage:React.FC<AllArticlePageProps> = async({articles}) => {
+const AllArticlePage:React.FC<AllArticlePageProps> = ({articles}) => {
 
    
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get('page') || '1';
+  const searchQuery = searchParams.get('search') || '';
 
     if(articles.length===0){
         return <NoSearchResultPage/>
     }
+
+
+    
+    // Get current page and search parameters
+    
+
   return (
    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
@@ -38,7 +50,7 @@ const AllArticlePage:React.FC<AllArticlePageProps> = async({articles}) => {
 
     <div className="p-6">
 
-      <Link href={`/articles/${article.id}`}>
+      <Link href={`/articles/${article.id}?search=${searchQuery}&page=${currentPage}`}>
       <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl'>
         <Image src={article.featuredImage as string}
         alt={article.title} fill className="object-cover"/>
