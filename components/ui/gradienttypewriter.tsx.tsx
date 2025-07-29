@@ -16,7 +16,7 @@ export default function GradientTypeWriter({
   useEffect(() => {
     const controls = animate(count, words.length, {
       type: 'tween',
-      duration: 6, // Increased from 1 to 2.5 seconds
+      duration: 2, // Increased from 1 to 2.5 seconds
       ease: 'easeInOut',
     });
     return controls.stop;

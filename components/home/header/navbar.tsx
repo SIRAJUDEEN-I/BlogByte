@@ -9,6 +9,33 @@ import Link from "next/link";
 // import { SignedIn, UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
 import { SignedIn, SignedOut,SignInButton,SignUpButton, UserButton } from "@clerk/nextjs";
+import { AnimatedBackground } from '@/components/motion-primitives/animated-background';
+
+const NavItems = [
+                <Link key='articles'
+                href="/articles"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                Articles
+              </Link>,
+             
+              <Link
+              key='about'
+                href="/about"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                About
+              </Link>,
+              <Link
+              key='dashboard'
+                href="/dashboard"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                Dashboard
+              </Link>
+
+]
+
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,30 +59,27 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-4">
-              <Link
-                href="/articles"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Articles
-              </Link>
-              <Link
-                href="/tutorials"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Tutorials
-              </Link>
-              <Link
-                href="/about"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                About
-              </Link>
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Dashboard
-              </Link>
+              <AnimatedBackground  
+              className='rounded-lg bg-zinc-100 dark:bg-zinc-800'
+        transition={{
+          type: 'spring',
+          bounce: 0.2,
+          duration: 0.3,
+        }}
+        enableHover>
+
+          {NavItems.map((item, index) => (
+          <button
+            key={index}
+            data-id={item}
+            type='button'
+            className='px-2 py-1 text-zinc-600 transition-colors duration-300 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50'
+          >
+            {item}
+          </button>
+        ))}
+
+                </AnimatedBackground>
             </div>
           </div>
 

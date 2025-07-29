@@ -16,7 +16,7 @@ const ArticleSearchInput = () => {
             <Search className='w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2'/>
             <Input type='text' name='search'
             defaultValue={searchParams.get('search') || ""}
-            placeholder='Search articles...'  className=' w-full pl-10 pr-4 py-6 text-lg' />
+            placeholder='Search articles...'  className='rounded-3xl w-full pl-10 pr-4 py-6 text-lg' />
             
         </div>
     </form>
