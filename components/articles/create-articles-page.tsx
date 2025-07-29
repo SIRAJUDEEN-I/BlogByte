@@ -138,12 +138,10 @@ export default function CreateArticles() {
                 </div>
                 {imagePreview && (
                   <div className="mt-4">
-                    <Image 
+                    <img 
                       src={imagePreview} 
-                      alt="Article featured image preview" 
-                      className="max-h-64 object-cover rounded-lg" 
-                      width={400}
-                      height={256}
+                      alt="Featured image preview" 
+                      className="max-h-64 object-cover rounded-lg w-full" 
                     />
                   </div>
                 )}

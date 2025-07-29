@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { updateArticles } from "@/actions/edit-article";
-import { PenTool, Image, Type, FolderOpen, FileText, Save, Edit } from "lucide-react";
+import { PenTool, ImageIcon, Type, FolderOpen, FileText, Save, Edit } from "lucide-react";
 import NextImage from "next/image";
 
 type EditPropsPage = {
@@ -124,7 +124,7 @@ const EditArticlePage: React.FC<EditPropsPage> = ({ article }) => {
               {/* Featured Image */}
               <div className="space-y-3">
                 <Label htmlFor="featuredImage" className="text-zinc-700 dark:text-zinc-300 font-medium flex items-center gap-2">
-                  <Image className="h-4 w-4" />
+                  <ImageIcon className="h-4 w-4"  />
                   Featured Image
                   <span className="text-xs text-zinc-500 dark:text-zinc-400 font-normal">(Max 5MB)</span>
                 </Label>
@@ -181,12 +181,12 @@ const EditArticlePage: React.FC<EditPropsPage> = ({ article }) => {
               {/* Image Preview */}
               {imagePreview && (
                 <div className="mt-4">
-                  <Image 
-                    src={imagePreview} 
-                    alt="Article featured image preview" 
-                    className="max-h-64 object-cover rounded-lg" 
-                    width={400}
-                    height={256}
+                  <NextImage
+                    src={imagePreview}
+                    alt="Featured image preview"
+                    width={800}
+                    height={400}
+                    className="max-h-64 object-cover rounded-lg w-full"
                   />
                 </div>
               )}
