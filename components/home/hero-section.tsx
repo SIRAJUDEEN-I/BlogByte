@@ -1,6 +1,7 @@
 import { Button } from "../ui/button"
 import Link from "next/link"
-
+import TextGenerateEffect from '@/components/ui/typewriter';
+import GradientTypeWriter from "../ui/gradienttypewriter.tsx";
 
 const HeroSection = () => {
   return (
@@ -14,12 +15,14 @@ const HeroSection = () => {
       <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 py-24 md:flex-row md:py-32">
 
         <div className="flex-1 space-y-8  text-left sm:text-center  ">
- 
-            <h1 className="text-4xl mt-15 font-bold tracking-tight text-white sm:text-5xl md:text-6xl">Explore the world through
 
-            <span  className=" bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-              {" "}words</span>
-            </h1>
+          <div className="mb-10 mt-10 flex-row md:flex-none  items-center justify-center relative">
+
+        <TextGenerateEffect words={'Explore the world through '} className=" text-4xl   font-bold tracking-tight text-white sm:text-5xl md:text-6xl"  />
+ 
+        <GradientTypeWriter words={' words'} className="pl-2  bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent text-4xl  font-bold tracking-tight sm:text-5xl md:text-6xl"  />
+          
+          </div>
 
             <p className="text-center mx-auto  max-w-2xl text-lg text-gray-300 md:text-xl">
               Discover insigthfull articles, throught-provoking stories, and expert perespectives on technology, lifestyle and innovation

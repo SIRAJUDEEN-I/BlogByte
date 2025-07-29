@@ -6,25 +6,21 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
-        
       },
       {
         protocol: 'https',
         hostname: 'picsum.photos',
-        
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.google.com',
       },
     ],
   },
-  webpack: (config) => {
-    config.watchOptions = {
-      ignored: [
-        '**/node_modules',
-        '**/.git',
-        '**/Application Data',
-        '**/AppData'
-      ]
-    };
-    return config;
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb', // Increase from default 1MB to 10MB
+    },
   },
 };
 

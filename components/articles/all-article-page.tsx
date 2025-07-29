@@ -2,6 +2,7 @@ import { Card } from "../ui/card"
 import Image from "next/image"
 import { Avatar,AvatarImage,AvatarFallback } from "../ui/avatar"
 import { Search } from "lucide-react"
+import Link from "next/link"
 
 type AllArticlePageProps = {
     articles: Array<{
@@ -28,45 +29,46 @@ const AllArticlePage:React.FC<AllArticlePageProps> = async({articles}) => {
     }
   return (
    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {articles.map((article) => (
-        <Card
-          key={article.id}
-          className="group relative overflow-hidden transition-all hover:shadow-lg"
-        >
-          <div className="p-6">
-            {/* Image Container */}
-            <div className="relative mb-4 h-48 w-full overflow-hidden rounded-xl">
-              <Image
-                src={article.featuredImage as string}
-                alt={article.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            {/* Article Content */}
-            <h3 className="text-lg font-semibold text-foreground">
-              {article.title}
-            </h3>
-            <p className=" text-sm mt-2 text-muted-foreground">{article.category}</p>
 
-            {/* Author & Metadata */}
-            <div className="mt-6 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={article.author.imageUrl as string} />
-                  <AvatarFallback>{article.author.name}</AvatarFallback>
-                </Avatar>
-                <span className="text-sm text-muted-foreground">
-                  {article.author.name}
-                </span>
-              </div>
-              <div className="text-sm text-muted-foreground">
-                {article.createdAt.toDateString()}
-              </div>
-            </div>
-          </div>
-        </Card>
-      ))}
+   {articles.slice(0,3).map((article)=>(
+  <Card
+  key={article.id}
+  className="group relative overflow-hidden transition-all hover:scale-[1.02] border border-gray-200/50 dark:border-white/10 bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg"
+  >
+
+    <div className="p-6">
+
+      <Link href={`/articles/${article.id}`}>
+      <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl'>
+        <Image src={article.featuredImage as string}
+        alt={article.title} fill className="object-cover"/>
+      </div>
+
+      <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 ">
+        <Avatar >
+          <AvatarImage src={article.author.imageUrl as string}/>
+          <AvatarFallback>
+            {article.author.name.charAt(0)}
+          </AvatarFallback>
+        </Avatar>
+        <span>{article.author.name}</span>
+      </div>
+
+      <h3 className="mt-4 text-2xl font-semibold text-gray-900 dark:text-white">
+        {article.title}
+      </h3>
+      <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{article.category}</p>
+
+      <div className="mt-6 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+
+        <span>{new Date(article.createdAt).toDateString()}</span>
+      </div>
+      
+      </Link>
+    </div>
+
+  </Card>
+))}
     </div>
   )
 }

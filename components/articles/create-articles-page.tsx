@@ -72,7 +72,7 @@ export default function CreateArticles() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="featuredImage">Featured Image</Label>
+              <Label htmlFor="featuredImage">Featured Image (Max 5mb)</Label>
               <Input
                 id="featuredImage"
                 name="featuredImage"
