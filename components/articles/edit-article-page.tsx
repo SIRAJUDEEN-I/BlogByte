@@ -26,6 +26,7 @@ type EditPropsPage = {
 const EditArticlePage: React.FC<EditPropsPage> = ({ article }) => {
   const [content, setContent] = useState(article.content);
   const [selectedCategory, setSelectedCategory] = useState(article.category);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [formState, action, isPending] = useActionState(
     updateArticles.bind(null, article.id),
     { errors: {} }
@@ -155,6 +156,18 @@ const EditArticlePage: React.FC<EditPropsPage> = ({ article }) => {
                     type="file"
                     accept="image/*"
                     className="border-zinc-200/60 dark:border-zinc-700/60 bg-white dark:bg-zinc-900/50 focus:border-blue-300 dark:focus:border-blue-600 focus:ring-blue-200/20 dark:focus:ring-blue-800/20 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 dark:file:bg-orange-950/30 dark:file:text-orange-400"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setImagePreview(reader.result as string);
+                        };
+                        reader.readAsDataURL(file);
+                      } else {
+                        setImagePreview(null);
+                      }
+                    }}
                   />
                 </div>
                 {formState.errors.featuredImage && (
@@ -164,6 +177,19 @@ const EditArticlePage: React.FC<EditPropsPage> = ({ article }) => {
                   </div>
                 )}
               </div>
+
+              {/* Image Preview */}
+              {imagePreview && (
+                <div className="mt-4">
+                  <Image 
+                    src={imagePreview} 
+                    alt="Article featured image preview" 
+                    className="max-h-64 object-cover rounded-lg" 
+                    width={400}
+                    height={256}
+                  />
+                </div>
+              )}
 
               {/* Content Editor */}
               <div className="space-y-3">

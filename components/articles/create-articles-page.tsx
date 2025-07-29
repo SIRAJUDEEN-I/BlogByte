@@ -16,6 +16,7 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 export default function CreateArticles() {
   const [content, setContent] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const [formState, action, isPending] = useActionState(createArticles, {
     errors: {},
@@ -121,8 +122,31 @@ export default function CreateArticles() {
                     type="file"
                     accept="image/*"
                     className="border-zinc-200/60 dark:border-zinc-700/60 bg-white dark:bg-zinc-900/50 focus:border-blue-300 dark:focus:border-blue-600 focus:ring-blue-200/20 dark:focus:ring-blue-800/20 file:mr-4 file:py-1 file:px-5 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-950/30 dark:file:text-blue-400 "
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (evt) => {
+                          setImagePreview(evt.target?.result as string);
+                        };
+                        reader.readAsDataURL(file);
+                      } else {
+                        setImagePreview(null);
+                      }
+                    }}
                   />
                 </div>
+                {imagePreview && (
+                  <div className="mt-4">
+                    <Image 
+                      src={imagePreview} 
+                      alt="Article featured image preview" 
+                      className="max-h-64 object-cover rounded-lg" 
+                      width={400}
+                      height={256}
+                    />
+                  </div>
+                )}
                 {formState.errors.featuredImage && (
                   <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
                     <div className="w-1 h-1 bg-red-500 rounded-full"></div>
